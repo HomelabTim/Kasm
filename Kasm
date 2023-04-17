@@ -1,0 +1,83 @@
+
+_______________________set swap_____________________________________________
+
+sudo dd if=/dev/zero bs=1M count=5120 of=/mnt/5GiB.swap
+sudo chmod 600 /mnt/5GiB.swap
+sudo mkswap /mnt/5GiB.swap
+sudo swapon /mnt/5GiB.swap
+cat /proc/swaps 
+echo '/mnt/5GiB.swap swap swap defaults 0 0' | sudo tee -a /etc/fstab
+
+
+__________________install Kasm____________________________________________________
+
+
+#create directories and set ownership
+sudo mkdir -p /data/shares/mystuff
+sudo mkdir -p /data/profiles
+sudo chown -R 1000:1000 /data
+
+#download and extract kasm workspace
+cd /tmp
+curl -O https://kasmweb-build-artifacts.s3.amazonaws.com/kasm_backend/branches/develop/kasm_workspaces_develop.tar.gz
+tar -xf kasm_workspaces_develop.tar.gz
+
+#run kasm installer
+sudo bash kasm_release/install.sh
+
+/data/profiles/mystuff/{username}
+
+{
+    "/data/shares/mystuff": {
+        "bind":"/shares/mystuff",
+        "mode":"rw",
+        "uid":1000,
+        "gid":1000,
+        "required":false
+    }
+}
+
+
+Pressistant Profiles:
+sudo mkdir -p /data/shares/accounting
+sudo mkdir -p /data/shares/engineering
+sudo mkdir -p /data/shares/management
+sudo mkdir -p /data/profiles
+sudo chown -R 1000:1000 /data
+
+
+Volume Mapping: 
+
+/data/profiles/development/{username}
+
+{
+    "/data/shares/development": {
+        "bind":"/shares/development",
+        "mode":"rw",
+        "uid":1000,
+        "gid":1000,
+        "required":false
+    }
+}
+
+
+Default Web Filter Policy
+
+Chrome Favorites
+
+Managed Policy
+
+/etc/opt/chrome/policies/managed/bookmarks.json
+
+{
+    "BookmarksBarEnabled": true,
+    "ManagedBookmarks":[
+        {
+            "toplevel_name":"Managed Bookmarks"
+        },
+        {
+            "name":"Kasm",
+            "url":"www.kasmweb.com"
+        }
+    ]
+}
