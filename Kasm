@@ -25,6 +25,10 @@ tar -xf kasm_workspaces_develop.tar.gz
 #run kasm installer
 sudo bash kasm_release/install.sh
 
+sudo mkdir -p /data/shares/mystuff
+sudo mkdir -p /data/profiles
+sudo chown -R 1000:1000 /data
+
 /data/profiles/mystuff/{username}
 
 {
