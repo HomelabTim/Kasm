@@ -37,30 +37,6 @@ sudo bash kasm_release/install.sh
     }
 }
 
-
-Pressistant Profiles:
-sudo mkdir -p /data/shares/accounting
-sudo mkdir -p /data/shares/engineering
-sudo mkdir -p /data/shares/management
-sudo mkdir -p /data/profiles
-sudo chown -R 1000:1000 /data
-
-
-Volume Mapping: 
-
-/data/profiles/development/{username}
-
-{
-    "/data/shares/development": {
-        "bind":"/shares/development",
-        "mode":"rw",
-        "uid":1000,
-        "gid":1000,
-        "required":false
-    }
-}
-
-
 Default Web Filter Policy
 
 Chrome Favorites
@@ -80,4 +56,14 @@ Managed Policy
             "url":"www.kasmweb.com"
         }
     ]
+}
+
+add this to Docker Exec Config (JSON) for sudo and root
+
+{
+    "first_launch":{
+        "user":"root",
+        "cmd":"bash -c 'apt-get update && apt-get install -y sudo && echo\"kasm-user ALL=(ALL)
+NOPASSWD:ALL\" >> /etc/sudoers'"
+    }
 }
