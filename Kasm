@@ -1,5 +1,5 @@
 
-_______________________set swap_____________________________________________
+#_______________________set swap_____________________________________________
 
 sudo dd if=/dev/zero bs=1M count=5120 of=/mnt/5GiB.swap
 sudo chmod 600 /mnt/5GiB.swap
@@ -9,7 +9,7 @@ cat /proc/swaps
 echo '/mnt/5GiB.swap swap swap defaults 0 0' | sudo tee -a /etc/fstab
 
 
-__________________install Kasm____________________________________________________
+#__________________install Kasm____________________________________________________
 
 
 #create directories and set ownership
@@ -37,11 +37,11 @@ sudo bash kasm_release/install.sh
     }
 }
 
-Default Web Filter Policy
+#Default Web Filter Policy
 
-Chrome Favorites
+#Chrome Favorites
 
-Managed Policy
+#Managed Policy
 
 /etc/opt/chrome/policies/managed/bookmarks.json
 
@@ -58,7 +58,7 @@ Managed Policy
     ]
 }
 
-add this to Docker Exec Config (JSON) for sudo and root
+#add this to Docker Exec Config (JSON) for sudo and root
 
 {
     "first_launch":{
@@ -67,3 +67,12 @@ add this to Docker Exec Config (JSON) for sudo and root
 NOPASSWD:ALL\" >> /etc/sudoers'"
     }
 }
+
+#code to connect to containers root profile
+
+docker exec -it -u root (adminkasm.lo_9eea9be5) (<<changed per container) bash
+
+#code for PPA in ubuntu for git
+
+sudo add-apt-repository ppa:git-core/ppa
+sudo apt update
