@@ -58,14 +58,21 @@ sudo bash kasm_release/install.sh
     ]
 }
 
+#change the Docker run config override to this
+
+{
+    "hostname":"kasm",
+    "user":"root",
+    "environment" : {"START_PULSEAUDIO" : "0"}
+}
+
 #add this to Docker Exec Config (JSON) for sudo and root
 
 {
-    "first_launch":{
-        "user":"root",
-        "cmd":"bash -c 'apt-get update && apt-get install -y sudo && echo\"kasm-user ALL=(ALL)
-NOPASSWD:ALL\" >> /etc/sudoers'"
-    }
+ "first_launch":{
+      "user":"root",
+      "cmd":"bash -c 'apt-get update && apt-get install -y sudo && echo \"kasm-user  ALL=(ALL) NOPASSWD: ALL\" >> /etc/sudoers'"
+  }
 }
 
 #code to connect to containers root profile
